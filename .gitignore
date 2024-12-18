@@ -39,3 +39,4 @@ application*.yaml
 /eureka-server/target/
 /school-service/target/
 /student-service/target/
+/api-gateway/target/
