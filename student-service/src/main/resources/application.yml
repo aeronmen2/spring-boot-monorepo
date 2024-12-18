@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: student-service
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/studentdb
+      database: studentdb
+      auto-index-creation: true
+
+logging:
+  level:
+    org.springframework.data.mongodb: DEBUG
+
+server:
+  port: 8081
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
