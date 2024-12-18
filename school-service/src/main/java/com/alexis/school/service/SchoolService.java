@@ -27,6 +27,16 @@ public class SchoolService {
                 .map(this::toDTO);
     }
 
+    public SchoolDTO updateSchool(Long id, SchoolDTO schoolDTO) {
+        School existingSchool = schoolRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("School not found"));
+
+        existingSchool.setName(schoolDTO.getName());
+        existingSchool.setAddress(schoolDTO.getAddress());
+
+        return toDTO(schoolRepository.save(existingSchool));
+    }
+
     public SchoolDTO save(SchoolDTO schoolDTO) {
         School school = toEntity(schoolDTO);
         return toDTO(schoolRepository.save(school));
@@ -36,7 +46,6 @@ public class SchoolService {
         schoolRepository.deleteById(id);
     }
 
-    // Conversion Methods
     private SchoolDTO toDTO(School school) {
         SchoolDTO dto = new SchoolDTO();
         dto.setId(school.getId());
