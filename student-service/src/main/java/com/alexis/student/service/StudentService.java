@@ -29,6 +29,25 @@ public class StudentService {
         return toDTO(studentRepository.save(student));
     }
 
+    public StudentDTO updateStudent(String id, StudentDTO studentDTO) {
+        Student existingStudent = studentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Student not found"));
+
+        existingStudent.setFirstName(studentDTO.getFirstName());
+        existingStudent.setLastName(studentDTO.getLastName());
+        existingStudent.setSchoolId(studentDTO.getSchoolId());
+
+        return toDTO(studentRepository.save(existingStudent));
+    }
+
+    public StudentDTO updateStudentSchool(String id, Long schoolId) {
+        Student existingStudent = studentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Student not found"));
+
+        existingStudent.setSchoolId(schoolId);
+        return toDTO(studentRepository.save(existingStudent));
+    }
+
     public void deleteById(String id) {
         studentRepository.deleteById(id);
     }
@@ -37,7 +56,6 @@ public class StudentService {
         return studentRepository.findById(id)
                 .map(this::toDTO);
     }
-
 
     public StudentWithSchool findStudentWithSchoolById(String id) {
         return studentRepository.findById(id)
@@ -52,7 +70,6 @@ public class StudentService {
         String schoolServiceUrl = "http://school-service/schools/{id}";
         return restTemplate.getForObject(schoolServiceUrl, Object.class, schoolId);
     }
-
 
     private StudentDTO toDTO(Student student) {
         StudentDTO dto = new StudentDTO();

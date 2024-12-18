@@ -16,7 +16,6 @@ public class StudentController {
 
     @GetMapping
     public List<StudentDTO> getAllStudents() {
-        System.out.println("StudentController.getAllStudents");
         return studentService.findAll();
     }
 
@@ -27,10 +26,19 @@ public class StudentController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-
     @PostMapping
     public StudentDTO createStudent(@RequestBody StudentDTO studentDTO) {
         return studentService.save(studentDTO);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<StudentDTO> updateStudent(@PathVariable String id, @RequestBody StudentDTO studentDTO) {
+        return ResponseEntity.ok(studentService.updateStudent(id, studentDTO));
+    }
+
+    @PatchMapping("/{id}/school")
+    public ResponseEntity<StudentDTO> updateStudentSchool(@PathVariable String id, @RequestBody Long schoolId) {
+        return ResponseEntity.ok(studentService.updateStudentSchool(id, schoolId));
     }
 
     @DeleteMapping("/{id}")
