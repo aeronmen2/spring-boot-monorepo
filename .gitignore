@@ -1,4 +1,41 @@
-# Project exclude paths
+# Ignore Maven build files
+target/
+*.jar
+*.war
+*.ear
+
+# Ignore IntelliJ IDEA files
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# Ignore Eclipse files
+.project
+.classpath
+.settings/
+
+# Ignore VS Code files
+.vscode/
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore logs
+*.log
+logs/
+log/
+
+# Ignore temp files
+*.swp
+*.tmp
+
+# Ignore application properties (if applicable)
+application*.properties
+application*.yaml
+
 /eureka-server/target/
 /school-service/target/
 /student-service/target/
